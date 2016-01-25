@@ -1,0 +1,94 @@
+<%- include ../include/head.ejs %>
+
+
+  <% if(level == 0){ %>
+    <%- include ../include/0_menu.ejs %>
+      <% } %>
+        <% if(level == 1){ %>
+          <%- include ../include/1_menu.ejs %>
+            <% } %>
+              <% if(level == 2){ %>
+                <%- include ../include/2_menu.ejs %>
+                  <% } %>
+
+                    <!-- Page Content -->
+                    <div class="container cook_container">
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h2>Accounts & instellingen</h2>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 center mar-3">
+                          <p>
+                            Hieronder staan uw accounts gegevens. Sommige hiervan kunt u aanpassen door de tekst te veranderen en op opslaan te klikken.
+                          </p>
+                          <hr>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 center">
+                          <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Voornaam</th>
+                                <th>Achternaam</th>
+                                <th>Leeftijd</th>
+                                <th>Gebruikersnaam</th>
+                                <th>Wachtwoord</th>
+                                <th>Level</th>
+                                <th class="none">Land</th>
+                                <th class="none">Keuken</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% for(var i = 0;i<result.length;i++){ %>
+                                  <tr id="<%= result[i].ID %>" class="user_tr" onclick="location.href='/settings/edit_user/<%= result[i].ID %>'">
+                                    <td>
+                                      <%= result[i].ID %>
+                                    </td>
+                                    <td>
+                                      <%= result[i].voornaam %>
+                                    </td>
+                                    <td>
+                                      <%= result[i].achternaam %>
+                                    </td>
+                                    <td>
+                                      <%= result[i].leeftijd %>
+                                    </td>
+                                    <td>
+                                      <%= result[i].gebruikersnaam %>
+                                    </td>
+                                    <td>
+                                      <%= result[i].wachtwoord %>
+                                    </td>
+                                    <td>
+                                      <%= result[i].level %>
+                                    </td>
+                                    <td class="none">
+                                      <%= result[i].landID %>
+                                    </td>
+                                    <td class="none">
+                                      <%= result[i].keukenID %>
+                                    </td>
+                                  </tr>
+                                <% } %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+
+<%- include ../include/footer.ejs %>
+
+<%- include ../include/end.ejs %>

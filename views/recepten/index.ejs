@@ -1,0 +1,51 @@
+<%- include ../include/head.ejs %>
+
+
+<% if(level == 0){ %>
+  <%- include ../include/0_menu.ejs %>
+<% } %>
+<% if(level == 1){ %>
+  <%- include ../include/1_menu.ejs %>
+<% } %>
+<% if(level == 2){ %>
+  <%- include ../include/2_menu.ejs %>
+<% } %>
+
+<!-- Page Content -->
+<div class="container cook_container">
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="site_title">Recepten <i class="fa fa-angle-double-right"></i> Alle recepten</h2>
+  </div>
+</div>
+<hr>
+<div class="row recept_row">
+  <% for(var i = 0;i < recepten.length;i++){ %>
+    <% if(recepten[i].foto_time == null){ recepten[i].foto_time = 'default.png'} %>
+    <a href="/recepten/<%= recepten[i].ID %>" class="recept_link">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 recept_item">
+        <div class="row recept_img" style="background-image: url(/uploads/<%= recepten[i].foto_time %>)">
+          <div class="col-sm-6 col-xs-12 recept_left">
+            <h3 class="recept_title"><%= recepten[i].titel %></h3>
+            <p class="recept_description">
+              <%= recepten[i].beschrijving_kort %>
+            </p>
+            <div class="col-md-12 recept_stars">
+              <% var stars = Math.round(star[i].avg) %>
+              <% for(var ii = 0; ii < stars;ii++){ %>
+                <i class="fa fa-star"></i>
+              <% } %>
+            </div>
+          </div>
+          <!-- <div class="col-sm-6 col-xs-12 preview_holder"> -->
+          </div>
+        </div>
+      </a>
+    <% } %>
+  </div>
+</div>
+
+<%- include ../include/footer.ejs %>
+
+<%- include ../include/end.ejs %>

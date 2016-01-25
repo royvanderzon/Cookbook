@@ -1,0 +1,98 @@
+<%- include ../include/head.ejs %>
+
+
+<% if(level == 0){ %>
+  <%- include ../include/0_menu.ejs %>
+<% } %>
+<% if(level == 1){ %>
+  <%- include ../include/1_menu.ejs %>
+<% } %>
+<% if(level == 2){ %>
+  <%- include ../include/2_menu.ejs %>
+<% } %>
+
+<!-- Page Content -->
+<div class="container cook_container">
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="site_title"><a href="/mijn_recepten">Mijn recepten</a> <i class="fa fa-angle-double-right"></i> Nieuw recept</h2>
+  </div>
+</div>
+<hr>
+<form id="from_edit_recept" class="form-horizontal" role="form" action="<%= postUrl %>" method="post">
+<div class="row">
+  <div class="col-sm-4 col-xs-12">
+    <button id="reset_text" class="btn btn-primary btn-lg btn-max">Reset tekst</button>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <button type="submit" class="btn btn-success btn-lg btn-max">Opslaan</button>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-10 col-sm-12 center">
+    <div class="row">
+      <div class="col-sm-4 col-xs-12">
+        <div class="form-group">
+          <label for="form_titel">Titel</label>
+          <input type="text" class="form-control" placeholder="Titel recept" id="form_titel" name="form_titel">
+        </div>
+        <div class="form-group">
+          <label for="form_omschrijving_kort">Omschrijving kort</label>
+          <textarea class="form-control" rows="5" placeholder="Omschrijving kort" id="form_omschrijving_kort" name="form_omschrijving_kort"></textarea>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <div class="photo_total">
+          <img src="/images/default.png" class="recept_photo">
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-6 col-sm-8 col-xs-12">
+        <h3>Beschrijving</h3>
+        <div class="form-group">
+          <label for="form_omschrijving_lang">Omschrijving kort</label>
+          <textarea class="form-control" rows="25" placeholder="Omschrijving lang" id="form_omschrijving_lang" name="form_omschrijving_lang"></textarea>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-4 col-xs-12">
+        <h3>Benodigdheden</h3>
+        <ul>
+          <li>
+            bloem 500gr
+          </li>
+          <li>
+            tomaat 4x
+          </li>
+          <li>
+            kaas 1000gr
+          </li>
+          <li>
+            melk 250ml
+          </li>
+          <li>
+            zout 2gr
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+</div>
+
+<%- include ../include/footer.ejs %>
+
+<script>
+$("#reset_text").click(function(event){
+    event.preventDefault();
+    $('#form_omschrijving_lang').val('');
+    $('#form_omschrijving_kort').val('');
+    $('#form_titel').val('');
+});
+</script>
+
+<%- include ../include/end.ejs %>

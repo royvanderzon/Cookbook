@@ -1,0 +1,34 @@
+<%- include ../include/head.ejs %>
+
+
+<% if(level == 0){ %>
+  <%- include ../include/0_menu.ejs %>
+<% } %>
+<% if(level == 1){ %>
+  <%- include ../include/1_menu.ejs %>
+<% } %>
+<% if(level == 2){ %>
+  <%- include ../include/2_menu.ejs %>
+<% } %>
+
+<!-- Page Content -->
+<div class="container cook_container">
+
+<div class="row">
+  <div class="col-md-12">
+    <h2><%= title %></h2>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-8 col-sm-10 col-xs-12 center mar-3">
+    <p>
+      <%= coupon %>
+    </p>
+</div>
+</div>
+</div>
+
+<%- include ../include/footer.ejs %>
+
+<%- include ../include/end.ejs %>

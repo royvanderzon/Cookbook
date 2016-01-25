@@ -1,0 +1,99 @@
+<%- include ../include/head.ejs %>
+
+<% if(level == 0){ %>
+  <%- include ../include/0_menu.ejs %>
+<% } %>
+<% if(level == 1){ %>
+  <%- include ../include/1_menu.ejs %>
+<% } %>
+<% if(level == 2){ %>
+  <%- include ../include/2_menu.ejs %>
+<% } %>
+
+
+<!-- Page Content -->
+<div class="container cook_container">
+
+
+<div class="row">
+  <div class="col-sm-12 col-md-6">
+    <h2>Inloggen</h2>
+    <hr>
+    <% if(error){ %>
+      <div class="error">
+        <%= error %>
+      </div>
+      <% } %>
+
+        <form id="from_login" class="form-horizontal" role="form" action="<%= postUrl %>" method="post">
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input id="field_username" type="text" class="form-control" name="username" value="" placeholder="gebruikersnaam">
+          </div>
+
+          <div style="margin-bottom: 25px" class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input id="field_password" type="password" class="form-control" name="password" placeholder="wachtwoord">
+          </div>
+
+
+          <div style="margin-top:10px" class="form-group">
+            <div class="col-sm-12 controls">
+              <button type="submit" class="btn btn-success btn-lg">Login</button>
+            </div>
+          </div>
+        </form>
+  </div>
+  <div class="col-sm-12 col-md-6">
+    <h2>Aanmelden</h2>
+    <hr>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#aanmelden">Aanmelden</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="aanmelden" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <form id="form_aanmelden" class="" role="form" action="/login/register" method="post">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Aanmelden</h4>
+      </div>
+      <div class="modal-body">
+        <p>Vul hieronder uw coupon code in die u van een vriend of collega hebt gekregen.</p>
+        <hr>
+        <div class="input-group">
+          <span class="input-group-addon">Code</span>
+          <input type="text" class="form-control" placeholder="couponcode" aria-describedby="coupon_code" name="coupon_code" id="coupon_code">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
+        <button type="submit" class="btn btn-success" id="signup_button">Aanmelden</button>
+      </div>
+    </form>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<%- include ../include/footer.ejs %>
+
+<script>
+$(function() {
+
+  $( "#signup_button" ).click(function() {
+    event.preventDefault();
+    $( "#form_aanmelden" ).submit();
+  });
+
+})
+</script>
+
+<%- include ../include/end.ejs %>

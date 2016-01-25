@@ -1,0 +1,135 @@
+<%- include ../include/head.ejs %>
+
+
+<% if(level == 0){ %>
+  <%- include ../include/0_menu.ejs %>
+<% } %>
+<% if(level == 1){ %>
+  <%- include ../include/1_menu.ejs %>
+<% } %>
+<% if(level == 2){ %>
+  <%- include ../include/2_menu.ejs %>
+<% } %>
+
+<!-- Page Content -->
+<div class="container cook_container">
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Mijn account</h2>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-8 col-sm-10 col-xs-12 center mar-3">
+    <p>
+      Hieronder staan uw accounts gegevens. Sommige hiervan kunt u aanpassen door de tekst te veranderen en op opslaan te klikken.
+    </p>
+    <hr>
+  </div>
+  <div class="col-md-8 col-sm-10 col-xs-12 center">
+    <div class="row p_line">
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <strong>Gebruikersnaam:</strong>
+        </p>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <%= user_obj.gebruikersnaam %>
+        </p>
+      </div>
+      <div class="col-xs-12"><div class="line "></div></div>
+    </div>
+    <div class="row p_line">
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <strong>Naam:</strong>
+        </p>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+        <p class="capitalize">
+          <%= user_obj.voornaam %> <%= user_obj.achternaam %>
+        </p>
+      </div>
+      <div class="col-xs-12"><div class="line "></div></div>
+    </div>
+    <div class="row p_line">
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <strong>Leeftijd:</strong>
+        </p>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <%= user_obj.leeftijd %>
+        </p>
+      </div>
+      <div class="col-xs-12"><div class="line "></div></div>
+    </div>
+    <div class="row p_line">
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <strong>Coupons over:</strong>
+        </p>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <%= coupons_over %>
+        </p>
+      </div>
+      <div class="col-xs-12"><div class="line "></div></div>
+    </div>
+    <div class="row p_line">
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <strong>Coupons gemaakt:</strong>
+        </p>
+      </div>
+      <div class="col-sm-3 col-xs-12">
+        <p>
+          <%= coupons_gemaakt %>
+        </p>
+      </div>
+      <div class="col-xs-12"><div class="line "></div></div>
+    </div>
+    <div class="row p_line">
+      <div class="col-sm-12 col-xs-12">
+        <% if(coupons_over <= 0){ %>
+        <a href="/user/generate_coupon/<%= user_obj.ID %>" class="btn btn-success btn-lg disabled">Genereer coupon</a>
+        <% } else { %>
+        <a href="/user/generate_coupon/<%= user_obj.ID %>" class="btn btn-success btn-lg">Genereer coupon</a>
+        <% } %>
+      </div>
+    </div>
+    <hr>
+    <div class="row p_line">
+      <div class="col-sm-12 col-xs-12">
+        <% for(var i = 0;i<gemaakte_coupons.length;i++){ %>
+          <div class="row">
+          <div class="col-sm-3 col-xs-6">
+            <span>Coupon code:</span>
+          </div>
+          <div class="col-sm-3 col-xs-6">
+            <% if(gemaakte_coupons[i].gebruikt == 0){ %>
+              <span><i class="fa fa-check"></i></span>
+            <% } else { %>
+              <i class="fa fa-times"></i>
+              <% } %>
+          </div>
+          <div class="col-sm-6 col-xs-6">
+            <span><%= gemaakte_coupons[i].code %></span>
+          </div>
+        </div>
+        <hr>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<%- include ../include/footer.ejs %>
+
+<%- include ../include/end.ejs %>

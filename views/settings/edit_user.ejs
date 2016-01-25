@@ -1,0 +1,191 @@
+<%- include ../include/head.ejs %>
+
+
+  <% if(level == 0){ %>
+    <%- include ../include/0_menu.ejs %>
+      <% } %>
+        <% if(level == 1){ %>
+          <%- include ../include/1_menu.ejs %>
+            <% } %>
+              <% if(level == 2){ %>
+                <%- include ../include/2_menu.ejs %>
+                  <% } %>
+
+                    <!-- Page Content -->
+                    <div class="container cook_container">
+                      <form id="form_edit_user" class="" role="form" action="/settings/update_user/<%= result.ID %>" method="post">
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h2><a href="/settings">Accounts</a> <i class="fa fa-angle-double-right"></i> <%= result.gebruikersnaam %></h2>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 center mar-3">
+                          <p>
+                            Hieronder staan uw accounts gegevens. Sommige hiervan kunt u aanpassen door de tekst te veranderen en op opslaan te klikken.
+                          </p>
+                          <hr>
+                        </div>
+                      </div>
+                      <div class="row recept_row">
+                        <div class="col-sm-4 col-xs-12">
+                          <buttom type="submit" id="submit_user" class="btn btn-success btn-lg btn-max">Opslaan</button>
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 center">
+                          <table class="table table-bordered table-striped edit_user_table">
+                            <thead>
+                              <tr>
+                                <th>ID</th>
+                                <th>Voornaam</th>
+                                <th>Achternaam</th>
+                                <th>Leeftijd</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="<%= result.ID %>" class="result_tr">
+                                  <td>
+                                    <%= result.ID %>
+                                  </td>
+                                  <td>
+                                    <input id="voornaam" name="voornaam" value="<%= result.voornaam %>">
+                                  </td>
+                                  <td>
+                                    <input id="achternaam" name="achternaam"  value="<%= result.achternaam %>">
+                                  </td>
+                                  <td>
+                                    <input id="leeftijd" name="leeftijd"  value="<%= result.leeftijd %>">
+                                  </td>
+                                </tr>
+                            </tbody>
+                          </table>
+                          <table class="table table-bordered table-striped edit_user_table">
+                            <thead>
+                              <tr>
+                                <th>Gebruikersnaam</th>
+                                <th>Wachtwoord</th>
+                                <th>Level</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="result_tr">
+                                  <td>
+                                    <input id="gebruikersnaam" name="gebruikersnaam"  value="<%= result.gebruikersnaam %>">
+                                  </td>
+                                  <td>
+                                    <input  id="wachtwoord" name="wachtwoord" value="<%= result.wachtwoord %>">
+                                  </td>
+                                  <td>
+                                    <select id="level" name="level" >
+                                      <option value="0">
+                                        0
+                                      </option>
+                                      <option value="1">
+                                        1
+                                      </option>
+                                      <option value="2">
+                                        2
+                                      </option>
+                                    </select>
+                                  </td>
+                                </tr>
+                            </tbody>
+                          </table>
+                          <table class="table table-bordered table-striped edit_user_table">
+                            <thead>
+                              <tr>
+                                <th>Land</th>
+                                <th>Keuken</th>
+                                <th>Coupons</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="result_tr">
+                                  <td>
+                                    <select  id="land" name="land" >
+                                      <option value="frankrijk">
+                                        frankrijk
+                                      </option>
+                                      <option value="duitsland">
+                                        duitsland
+                                      </option>
+                                      <option value="nederland">
+                                        nederland
+                                      </option>
+                                      <option value="amerikaan">
+                                        amerikaan
+                                      </option>
+                                      <option value="japan">
+                                        japan
+                                      </option>
+                                      <option value="spanje">
+                                        spanje
+                                      </option>
+                                      <option value="griekenland">
+                                        griekenland
+                                      </option>
+                                      <option value="noorwegen">
+                                        noorwegen
+                                      </option>
+                                      <option value="china">
+                                        china
+                                      </option>
+                                      <option value="italie">
+                                        italie
+                                      </option>
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <select  id="keuken" name="keuken" >
+                                      <option value="grill">
+                                        grill
+                                      </option>
+                                      <option value="oosters">
+                                        oosters
+                                      </option>
+                                      <option value="frans">
+                                        frans
+                                      </option>
+                                      <option value="amerikaans">
+                                        amerikaans
+                                      </option>
+                                      <option value="chinees">
+                                        chinees
+                                      </option>
+                                      <option value="hollands">
+                                        hollands
+                                      </option>
+                                    </select>
+                                  </td>
+                                  <td>
+                                    <input value="<%= result.coupons %>" name="coupons" id="coupons">
+                                  </td>
+                                </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </form>
+                    </div>
+
+                    <%- include ../include/footer.ejs %>
+
+                    <script>
+
+                    $( document ).ready(function() {
+                      $( "#submit_user" ).click(function() {
+                        event.preventDefault();
+                        $( "#form_edit_user" ).submit();
+                      });
+
+                      var temp="<%= result.level %>";
+                      $("#level").val(temp);
+                    });
+
+                    </script>
+
+                      <%- include ../include/end.ejs %>

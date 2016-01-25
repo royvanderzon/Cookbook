@@ -1,0 +1,69 @@
+<%- include ./include/head.ejs %>
+
+<% if(level == 1){ %>
+  <%- include ./include/1_menu.ejs %>
+<% } else if (level == 2) { %>
+  <%- include ./include/2_menu.ejs %>
+<% } else {%>
+  <%- include ./include/0_menu.ejs %>
+  <% } %>
+
+
+
+<!-- Page Content -->
+<div class="container">
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="jumbotron" id="fisrt_jumbotron">
+      <h1>
+        <%= title %>
+      </h1>
+      <p>
+        <%= title_capation %>
+      </p>
+      <p><a class="btn btn-primary btn-lg" href="/recepten" role="button">Bekijk de recepten</a></p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- Page Content -->
+<div class="container cook_container">
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-center">Random recepten</h2>
+  </div>
+</div>
+<hr>
+<div class="row recept_row">
+  <% for(var i = 0;i < numbers.length;i++){ %>
+    <% if(recepten[numbers[i]].foto_time == null){ recepten[numbers[i]].foto_time = 'default.png'} %>
+    <a href="/recepten/<%= recepten[numbers[i]].ID %>" class="recept_link">
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 recept_item">
+        <div class="row recept_img" style="background-image: url(/uploads/<%= recepten[numbers[i]].foto_time %>)">
+          <div class="col-sm-6 col-xs-12 recept_left">
+            <h3 class="recept_title"><%= recepten[numbers[i]].titel %></h3>
+            <p class="recept_description">
+              <%= recepten[numbers[i]].beschrijving_kort %>
+            </p>
+            <div class="col-md-12 recept_stars">
+              <% if(recepten[numbers[i]].beoordeling == null){ recepten[numbers[i]].beoordeling = 5} %>
+              <% for(var ii = 0; ii < recepten[numbers[i]].beoordeling;ii++){%>
+              <i class="fa fa-star"></i>
+              <% } %>
+            </div>
+          </div>
+          <!-- <div class="col-sm-6 col-xs-12 preview_holder"> -->
+          </div>
+        </div>
+      </a>
+    <% } %>
+  </div>
+</div>
+
+<%- include ./include/footer.ejs %>
+
+<%- include ./include/end.ejs %>

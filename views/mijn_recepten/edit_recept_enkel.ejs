@@ -1,0 +1,152 @@
+<%- include ../include/head.ejs %>
+
+
+<% if(level == 0){ %>
+  <%- include ../include/0_menu.ejs %>
+<% } %>
+<% if(level == 1){ %>
+  <%- include ../include/1_menu.ejs %>
+<% } %>
+<% if(level == 2){ %>
+  <%- include ../include/2_menu.ejs %>
+<% } %>
+
+<!-- Page Content -->
+<div class="container cook_container">
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="site_title"><a href="/mijn_recepten">Mijn recepten</a> <i class="fa fa-angle-double-right"></i> <%= recept.titel %></h2>
+  </div>
+</div>
+<hr>
+<form id="from_edit_recept" class="form-horizontal" role="form" action="<%= postUrl %>" method="post">
+<div class="row">
+  <div class="col-sm-4 col-xs-12">
+    <button id="reset_text" class="btn btn-primary btn-lg btn-max">Reset tekst</button>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <button type="submit" class="btn btn-success btn-lg btn-max">Opslaan</button>
+  </div>
+  <div class="col-sm-4 col-xs-12">
+    <a href="/mijn_recepten/delete/<%= recept.gebruiker_ID %>" id="delete_recept" class="btn btn-danger btn-lg btn-max">Verwijder</a>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-10 col-sm-12 center">
+    <div class="row">
+      <div class="col-sm-4 col-xs-12">
+        <div class="form-group">
+          <label for="form_titel">Titel</label>
+          <input type="text" class="form-control" placeholder="Titel recept" value="<%= recept.titel %>" id="form_titel" name="form_titel">
+        </div>
+        <div class="form-group">
+          <label for="form_omschrijving_kort">Omschrijving kort</label>
+          <textarea class="form-control" rows="5" placeholder="Omschrijving kort" id="form_omschrijving_kort" name="form_omschrijving_kort"><%= recept.beschrijving_kort %></textarea>
+        </div>
+      </div>
+      <div class="col-sm-8 col-xs-12">
+        <div class="photo_total">
+          <% if(recept.foto_time == null){ recept.foto_time = 'default.png'} %>
+          <img src="/uploads/<%= recept.foto_time %>" class="transform_object recept_photo pointer">
+          <div class="star_placeholder">
+            <% var stars = Math.round(star[0].avg) %>
+            <% for(var ii = 0; ii < stars;ii++){ %>
+              <i class="fa fa-star"></i>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-6 col-sm-8 col-xs-12">
+        <h3>Beschrijving</h3>
+        <div class="form-group">
+          <label for="form_omschrijving_lang">Omschrijving kort</label>
+          <textarea class="form-control" rows="25" placeholder="Omschrijving lang" id="form_omschrijving_lang" name="form_omschrijving_lang"><%= recept.beschrijving_lang %></textarea>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-4 col-xs-12">
+        <h3>Benodigdheden</h3>
+        <ul>
+          <li>
+            bloem 500gr
+          </li>
+          <li>
+            tomaat 4x
+          </li>
+          <li>
+            kaas 1000gr
+          </li>
+          <li>
+            melk 250ml
+          </li>
+          <li>
+            zout 2gr
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<input value="<%= recept.gebruiker_ID %>" id="gebruiker_ID" name="gebruiker_ID" class="none">
+</form>
+<form id="form_delete" role="form" class="none" action="/mijn_recepten/delete/<%= recept.ID %>" method="post">
+  <input value="<%= recept.gebruiker_ID %>" id="gebruiker_ID" name="gebruiker_ID" class="none">
+  <input value="<%= recept.ID %>" id="recept_ID" name="recept_ID" class="none">
+</form>
+
+<form action="/files/upload_photo/<%= recept.ID %>" id="photo_form" method="post" class="none" enctype="multipart/form-data">
+  <label for="bs-file">File:</label>
+    <input type="file" name="bs-file" id="bs-file" value=""/>
+  <label for="submit"></label>
+    <button type="submit" id="photo_submit" value="Upload!"/>Upload</button>
+    <input value="<%= recept.gebruiker_ID %>" id="gebruiker_ID" name="gebruiker_ID" class="none">
+</form>
+
+</div>
+
+<%- include ../include/footer.ejs %>
+
+<script>
+
+  $(function() {
+
+    $("#reset_text").click(function(event){
+        event.preventDefault();
+        $('#form_omschrijving_lang').val('');
+        $('#form_omschrijving_kort').val('');
+        $('#form_titel').val('');
+    });
+
+    $( "#delete_recept" ).click(function() {
+      event.preventDefault();
+      $( "#form_delete" ).submit();
+    });
+
+    // $( "#delete_recept" ).click(function() {
+    //   event.preventDefault();
+    //   $( "#form_delete" ).submit();
+    // });
+
+    $('.recept_photo').click(function(){
+      $('#bs-file').trigger('click');
+    })
+
+    document.querySelector('#bs-file').onchange=function(){
+      $('#photo_submit').trigger('click');
+    }
+
+
+    // document.getElementById("photo_form").submit();
+    // var submit_photo = function(){
+    //   $( "#photo_form" ).submit();
+    // }
+
+  });
+
+</script>
+
+<%- include ../include/end.ejs %>
